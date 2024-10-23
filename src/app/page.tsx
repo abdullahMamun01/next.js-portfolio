@@ -8,7 +8,7 @@ import BLogSection from "../components/BlogSection";
 import ContactSection from "../components/ContactSection";
 import { InViewBasic } from "@/components/animation/InviewBasic";
 
-export default function HomePage() {
+export default async function HomePage() {
   return (
     <>
       <InViewBasic>
