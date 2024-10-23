@@ -32,7 +32,7 @@ export default async function SkillsSection() {
 
   return (
     <section className="py-16 bg-gradient-to-b  from-[#07223A] to-[#062E4F]  text-white px-[3rem]" id="#skill">
-      <div className=" mx-auto px-20">
+      <div className=" mx-auto md:px-20">
         <h2 className="text-3xl font-bold text-center mb-8 uppercase ">
           My Skills
         </h2>
