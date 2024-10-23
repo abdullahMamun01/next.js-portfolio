@@ -43,7 +43,8 @@ export default async function HeroSection() {
       
         <div className="flex space-x-4">
           <a
-            href="#"
+            href="https://www.facebook.com/abdullah.Mamun772/"
+            target="_blank"
             className="bg-[#1877f2] p-2 rounded-full hover:opacity-80 transition-opacity"
           >
             <FaFacebookF size={20} />

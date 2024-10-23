@@ -77,7 +77,7 @@ export default function AboutMeForm() {
         const value = formData[key as keyof typeof formData];
 
         if (value !== "") {
-          updateData[key] = value;
+          updateData[key] = value
         }
       }
 
@@ -85,12 +85,17 @@ export default function AboutMeForm() {
         if (socialLinks && typeof socialLinks === "object") {
           const socialValue = socialLinks[key as keyof typeof socialLinks];
           if (socialValue !== "") {
-            updateData[key] = socialValue;
+            updateData['socialLinks'] = {
+              ...updateData['socialLinks'] ,
+              [key] : socialValue
+            };
           }
         }
       }
 
-        await updateUserAction(formData);
+        await updateUserAction(updateData);
+        console.log(updateData)
+
       
         setFormData({
           bio:"" ,

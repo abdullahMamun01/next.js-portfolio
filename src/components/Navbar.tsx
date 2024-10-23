@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+
 import { useEffect, useState } from "react";
 
 import { FaBars, FaTimes } from "react-icons/fa";
@@ -19,8 +19,7 @@ export default function Navbar() {
     console.log(window.location.pathname)
   },[])
 
-  const pathName = usePathname()
-  console.log(pathName)
+  
 
 
 

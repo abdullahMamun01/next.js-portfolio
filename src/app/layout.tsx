@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 //bg-gradient-to-b from-[#071A2F] to-[#07223A]
 import Navbar from "../components/Navbar";
+import { dbConnect } from "@/services/dbConnect";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -20,11 +21,14 @@ export const metadata: Metadata = {
   description: "Mern stack developer",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>) 
+{
+await dbConnect()
+
   return (
     <html lang="en">
       <body
