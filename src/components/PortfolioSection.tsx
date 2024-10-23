@@ -29,7 +29,7 @@ export default async function PortfolioSection() {
       <div>
    
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-8 md:px-20 ">
-            {projects.slice(0, 3).map((project, index) => (
+            {projects.slice(0, 6).map((project, index) => (
               <div
                 key={index}
                 className="bg-[#07223A] text-white rounded-lg overflow-hidden"
