@@ -10,9 +10,9 @@ export default async function BLogSection() {
 
 
   return (
-        <section className=" px-20 py-20 bg-gradient-to-b  from-[#07223A] to-[#062E4F] " id='blog'>
+        <section className=" px-10 md:px-20 py-20 bg-gradient-to-b  from-[#07223A] to-[#062E4F] " id='blog'>
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-3xl font-bold">Latest from the Blog</h2>
+            <h2 className="text-xl md:text-3xl font-bold">Latest from the Blog</h2>
             <Link href="/blog" className="text-blue-500 hover:text-blue-400 flex items-center">
               View All Posts
               <ArrowRight className="ml-2 h-4 w-4" />

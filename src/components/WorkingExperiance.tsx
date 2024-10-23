@@ -8,7 +8,7 @@ export default async  function WorkingExperiance() {
   const workExperiences = await allJobExperianceFromDB()
 
   return (
-    <div className="bg-gradient-to-b  from-[#07223A] to-[#062E4F]  px-20" id="experiance">
+    <div className="bg-gradient-to-b  from-[#07223A] to-[#062E4F] px-10 md:px-20" id="experiance">
       <div className="container py-16">
         <div className="mb-2 text-white">
           <span className="text-sm  px-2 py-1 rounded-full">
@@ -16,7 +16,7 @@ export default async  function WorkingExperiance() {
           </span>
         </div>
         <div>
-          <h1 className="text-white text-4xl font-bold uppercase">
+          <h1 className="text-white text-2xl md:text-4xl font-bold uppercase">
             MY WORKING <span className="text-[#64ffda] ">Experiance </span>
           </h1>
         </div>
@@ -24,7 +24,7 @@ export default async  function WorkingExperiance() {
           {workExperiences.map((experiance) => (
             <div
               key={experiance.id}
-              className="flex flex-col md:flex-row bg-[#04335C] rounded-lg overflow-hidden gap-3 shadow-md  my-8 p-10"
+              className="flex flex-col md:flex-row bg-[#04335C] rounded-lg overflow-hidden gap-3 shadow-md  my-8 p-5 md:p-10"
             >
               <div className="bg-[#4169e1] p-6 md:w-1/3 text-white rounded-t-md">
                 <h3 className="text-2xl font-bold mb-2">{experiance.position}</h3>

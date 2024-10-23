@@ -10,15 +10,15 @@ export default async function PortfolioSection() {
 
   return (
     <section className="bg-[#04335C] text-white py-10 md:px-8 " id="project">
-      <div className=" mx-auto  px-[5rem]">
+      <div className=" mx-auto px-8  md:px-[5rem]">
         <div className="mb-12 flex justify-between">
           <div>
             <h2 className="text-sm mb-2">MY WORK</h2>
-            <h1 className="text-4xl font-bold mb-8">RECENT PROJECT</h1>
+            <h1 className="text-2xl md:text-4xl font-bold mb-8">RECENT PROJECT</h1>
           </div>
 
           <Link
-            href="/blog"
+            href="/projects"
             className="text-white hover:text-blue-400 flex items-center"
           >
             View All Posts
@@ -28,7 +28,7 @@ export default async function PortfolioSection() {
       </div>
       <div>
    
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-20 ">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-8 md:px-20 ">
             {projects.slice(0, 3).map((project, index) => (
               <div
                 key={index}

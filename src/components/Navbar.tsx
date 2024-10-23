@@ -2,7 +2,6 @@
 "use client";
 import Link from "next/link";
 
-
 import { useState } from "react";
 
 import { FaBars, FaTimes } from "react-icons/fa";
@@ -40,12 +39,14 @@ export default function Navbar() {
   return (
     <header className="py-6 flex justify-between items-center relative max-w-[1300px] mx-auto">
       <div className="text-2xl font-bold">
-        <span className="text-[#4d79ff] bg-white p-1 mr-1">A</span>BDULLAH
+        <Link href="/">
+          <span className="text-[#4d79ff] bg-white p-1 mr-1">A</span>BDULLAH
+        </Link>
       </div>
       <nav
         className={`${
           isMenuOpen ? "flex" : "hidden"
-        } md:flex flex-col md:flex-row absolute md:relative top-full left-0 w-full md:w-auto bg-[#0c1424] p-4 md:bg-transparent z-50`}
+        } md:flex flex-col md:flex-row absolute md:relative top-full left-0 w-full md:w-auto bg-[#0c1424] p-4  md:bg-transparent z-50`}
       >
         {navItems.map((nav, i) => (
           <Link
@@ -56,7 +57,6 @@ export default function Navbar() {
                 ? "border-b-2 border-white py-2 md:py-0 md:mr-8 "
                 : "hover:text-[#4d79ff] py-2 md:py-0 md:mr-8 "
             } uppercase `}
-
             onClick={() => setActiveNav(nav.name)}
           >
             {nav.name}
