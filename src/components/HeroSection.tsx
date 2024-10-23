@@ -37,7 +37,7 @@ export default async function HeroSection() {
 
         <button className="bg-[#4d79ff] px-8 py-3 flex rounded-full hover:bg-[#3a5ec2] transition-colors mb-8">
           <a href={user.resumeUrl} target="_blank" className="flex">
-          GET IN TOUCH <ArrowRight className="ml-2"/>
+          GET IN TOUCH CV <ArrowRight className="ml-2"/>
           </a>
         </button>
       
