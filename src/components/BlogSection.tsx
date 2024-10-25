@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { allBlogFromDB } from '@/database/queries'
-export const revalidate = 60;
+
 export default async function BLogSection() {
  
 

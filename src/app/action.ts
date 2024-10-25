@@ -38,7 +38,8 @@ export const projectAction = async (payload: IProject) => {
   try {
     await projectSaveIntoDB(payload);
     revalidatePath("/")
-    revalidatePath('/dashboard/project')
+    revalidatePath("/projects")
+  revalidatePath('/dashboard/project')
   } catch (error: unknown) {
     const err = error as Error;
     throw new Error(err.message);
@@ -48,6 +49,8 @@ export const projectAction = async (payload: IProject) => {
 export const blogAction = async (payload: IBLog) => {
   try {
     await blogSaveIntoDB(payload);
+    revalidatePath('/')
+    revalidatePath('/blogs')
   } catch (error: unknown) {
     const err = error as Error;
     throw new Error(err.message);
@@ -109,14 +112,21 @@ export const deleteSkillAction = async (id: string) => {
   return deleteSkill;
 };
 
+
+
+
 export const deleteProjectAction = async (id: string) => {
   const deleteProject = await deleteProjectromDB(id);
   revalidatePath("/")
   revalidatePath('/dashboard/project')
+  revalidatePath("/projects")
   return deleteProject;
 };
 
 export const deleteBlogAction = async (id: string) => {
   const deleteProject = await deleteBlogFromDB(id);
+  revalidatePath("/")
+  revalidatePath('/blogs')
+  revalidatePath("/dashboard/portfolio-manage")
   return deleteProject;
 };

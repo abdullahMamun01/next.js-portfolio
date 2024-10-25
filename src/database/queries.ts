@@ -93,6 +93,9 @@ const deleteSkillFromDB = async (id: string) => {
   return deleteSkill;
 };
 
+
+
+
 const singleProject = async (id: string) => {
   await dbConnect()
   const project = await ProjectModel.findById(id);
