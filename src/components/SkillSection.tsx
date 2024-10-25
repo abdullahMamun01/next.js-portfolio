@@ -1,7 +1,7 @@
 import { allSkillFromDB } from "@/database/queries";
 import Image from "next/image";
-export const dynamic = 'force-dynamic';
 
+export const revalidate = 60;
 
 // const skills = [
 //   { name: "React.js", icon: <FaReact className="text-[#61DAFB]" /> },
