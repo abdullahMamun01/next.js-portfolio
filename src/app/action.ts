@@ -37,6 +37,8 @@ export const skillAction = async (payload: ISkill) => {
 export const projectAction = async (payload: IProject) => {
   try {
     await projectSaveIntoDB(payload);
+    revalidatePath("/")
+    revalidatePath('/dashboard/project')
   } catch (error: unknown) {
     const err = error as Error;
     throw new Error(err.message);
@@ -109,6 +111,8 @@ export const deleteSkillAction = async (id: string) => {
 
 export const deleteProjectAction = async (id: string) => {
   const deleteProject = await deleteProjectromDB(id);
+  revalidatePath("/")
+  revalidatePath('/dashboard/project')
   return deleteProject;
 };
 
