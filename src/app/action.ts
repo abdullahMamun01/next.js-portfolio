@@ -26,7 +26,8 @@ export const skillAction = async (payload: ISkill) => {
 
   try {
     await skillSaveIntoDB(payload);
-    revalidatePath('/')
+    revalidatePath("/")
+    revalidatePath('/dashboard/portfolio-manage')
   } catch (error: unknown) {
     const err = error as Error;
     throw new Error(err.message);

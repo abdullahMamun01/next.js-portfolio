@@ -19,9 +19,9 @@ export default async function HomePage() {
       <InViewBasic>
         <AboutSection />
       </InViewBasic>
-
+      <InViewBasic>
         <SkillsSection />
-
+      </InViewBasic>
       <InViewBasic>
         <PortfolioSection />
       </InViewBasic>
