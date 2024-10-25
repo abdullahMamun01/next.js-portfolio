@@ -19,11 +19,14 @@ import {
   updateBio,
 
 } from "@/database/queries";
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
 export const skillAction = async (payload: ISkill) => {
+
   try {
     await skillSaveIntoDB(payload);
+    revalidatePath('/')
   } catch (error: unknown) {
     const err = error as Error;
     throw new Error(err.message);
@@ -98,6 +101,7 @@ export const updateUserAction = async (payload: Partial<IUser>) => {
 
 export const deleteSkillAction = async (id: string) => {
   const deleteSkill = await deleteSkillFromDB(id);
+  revalidatePath("/")
   return deleteSkill;
 };
 
