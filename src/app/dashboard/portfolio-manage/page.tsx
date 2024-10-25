@@ -5,6 +5,8 @@ import { allJobExperianceFromDB, allProjectFromDB } from '@/database/queries';
 
 import React from 'react'
 
+export const revalidate = 60;
+
 export default function page() {
   return (
     <div className='px-20 p-6 rounded-lg shadow-md'>

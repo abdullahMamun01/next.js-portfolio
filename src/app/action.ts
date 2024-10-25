@@ -102,6 +102,7 @@ export const updateUserAction = async (payload: Partial<IUser>) => {
 export const deleteSkillAction = async (id: string) => {
   const deleteSkill = await deleteSkillFromDB(id);
   revalidatePath("/")
+  revalidatePath('/dashboard/portfolio-manage')
   return deleteSkill;
 };
 
