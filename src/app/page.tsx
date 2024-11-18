@@ -4,7 +4,7 @@ import SkillsSection from "../components/SkillSection";
 import PortfolioSection from "../components/PortfolioSection";
 import AboutSection from "../components/AboutSection";
 import WorkingExperiance from "../components/WorkingExperiance";
-import BLogSection from "../components/BlogSection";
+// import BLogSection from "../components/BlogSection";
 import ContactSection from "../components/ContactSection";
 import { InViewBasic } from "@/components/animation/InviewBasic";
 
@@ -28,9 +28,9 @@ export default async function HomePage() {
       <InViewBasic>
         <WorkingExperiance />
       </InViewBasic>
-      <InViewBasic>
+      {/* <InViewBasic>
         <BLogSection />
-      </InViewBasic>
+      </InViewBasic> */}
       <InViewBasic>
         <ContactSection />
       </InViewBasic>
