@@ -10,7 +10,7 @@ import { AnimatedGroup } from "./animation/AnimatedGroup";
 
 export default async function HeroSection() {
   const user = await getUser();
-  const title = user.skillTitle.split(" ");
+  const title = user?.skillTitle.split(" ");
 
   return (
     <main className="py-16 flex flex-col md:flex-row items-center justify-between " id="hero">
