@@ -4,10 +4,10 @@ import { Facebook,  Linkedin } from 'lucide-react'
 
 export default function ContactSection() {
   return (
-    <section className="bg-[#0f2744] text-white py-16 ">
+    <section className=" text-white py-16 ">
       <div className=" mx-auto px-4 ">
-        <div className=" rounded-lg overflow-hidden px-5 md:px-20">
-          <div className="flex flex-col md:flex-row bg-gradient-to-t  from-[#05345D] to-[#05345D] " id='contact'>
+        <div className=" rounded-lg overflow-hidden ">
+          <div className="flex flex-col md:flex-row py-20 bg-[#172A45] " id='contact'>
             <div className="md:w-1/3 p-8 ">
               <div className="rounded-lg overflow-hidden mb-6">
                 <Image

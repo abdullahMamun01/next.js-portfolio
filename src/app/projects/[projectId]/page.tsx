@@ -1,16 +1,23 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ExternalLink, Github } from "lucide-react";
-import { singleProject } from "@/database/queries";
+
+import { client, imageUrlFor } from "@/sanity/client";
 
 export default async function ProjectDetails({
   params: { projectId },
 }: {
   params: { projectId: string };
 }) {
-  const project = await singleProject(projectId);
+  const query = `*[_id == $id][0]{_id, name, description, clientRepo,serverRepo, liveUrl,tags ,features, image}`; // Query for the document by _id
+
+  const project = await client.fetch(query, { id: projectId });
+
+  const image = imageUrlFor(project.image).url();
+
   return (
-    <div className="min-h-screen bg-[#020b16] text-white">
+    <div className="min-h-screen  text-white px-6">
       <main className="container mx-auto px-4 py-12">
         <Link
           href="/projects"
@@ -20,11 +27,11 @@ export default async function ProjectDetails({
           Back to Projects
         </Link>
 
-        <h1 className="text-4xl font-bold mb-4">{project.title}</h1>
+        <h1 className="text-4xl font-bold mb-4">{project.name}</h1>
 
         <div className="mb-8">
           <Image
-            src={project.imageUrl}
+            src={image}
             alt="CARE-SPA Project Screenshot"
             width={1200}
             height={600}
@@ -34,7 +41,7 @@ export default async function ProjectDetails({
         <div className="my-4">
           <h2 className="text-2xl font-semibold mb-4">Technologies Used</h2>
           <div className="flex flex-wrap gap-2">
-            {project?.technologies?.map((tech : string, index:number) => (
+            {project?.tags?.map((tech: string, index: number) => (
               <span
                 key={index}
                 className="px-3 py-1 bg-[#0f2744] text-blue-300 rounded-full text-sm"
@@ -50,16 +57,12 @@ export default async function ProjectDetails({
             <p className="text-gray-300 mb-4">{project.description}</p>
             <h3 className="text-xl font-semibold mb-2">Key Features</h3>
             <ul className="list-disc list-inside text-gray-300 mb-4">
-              <li>Responsive design for all device sizes</li>
-              <li>User authentication and authorization</li>
-              <li>Real-time booking system</li>
-              <li>Admin dashboard for managing services and bookings</li>
-              <li>Integration with payment gateways</li>
-              <li>
-                Email notifications for booking confirmations and reminders
-              </li>
+              {project.features?.map(
+                (item: { feature: string; _key: string }) => (
+                  <li key={item._key}>{item.feature}</li>
+                )
+              )}
             </ul>
-           
           </div>
           <div>
             <h2 className="text-2xl font-semibold mb-4">Project Information</h2>
@@ -67,7 +70,7 @@ export default async function ProjectDetails({
               <p className="mb-2">
                 <strong>Client:</strong> {project.title}
               </p>
-              
+
               <div className="mt-6">
                 <a
                   href={`${project.liveUrl}`}
@@ -78,7 +81,7 @@ export default async function ProjectDetails({
                   Visit Live Site
                 </a>
                 <a
-                  href={`${project.githubClient}`}
+                  href={`${project.clientRepo}`}
                   target="_blank"
                   className="inline-flex items-center my-2 bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition duration-300 w-full justify-center"
                 >
@@ -86,7 +89,7 @@ export default async function ProjectDetails({
                   View Github Client source Code
                 </a>
                 <a
-                  href={`${project.githubBackend}`}
+                  href={`${project.serverRepo}`}
                   target="_blank"
                   className="inline-flex items-center bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition duration-300 w-full justify-center"
                 >

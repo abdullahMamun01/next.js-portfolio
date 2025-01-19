@@ -1,4 +1,4 @@
-import { allJobExperianceFromDB } from "@/database/queries";
+
 import React from "react";
 
 export const dynamic = 'force-dynamic';
@@ -6,10 +6,21 @@ export const dynamic = 'force-dynamic';
 
 
 export default async  function WorkingExperiance() {
-  const workExperiences = await allJobExperianceFromDB()
+  const experiances = [
+    {
+      id: 1,
+      position: "Front-end Developer",
+      company: "Prayersconnect",
+      location: "Remote",
+      startDate: "Apr 2024",
+      endDate: "Aug 2024",
+      employmentType: "Full-time",
+      experienceGain: "Developed scalable web applications and improved system performance."
+    }
+  ]
 
   return (
-    <div className="bg-gradient-to-b  from-[#07223A] to-[#062E4F] px-10 md:px-20" id="experiance">
+    <div className="bg-[#172A45] px-10 md:px-20" id="experiance">
       <div className="container py-16">
         <div className="mb-2 text-white">
           <span className="text-sm  px-2 py-1 rounded-full">
@@ -22,12 +33,12 @@ export default async  function WorkingExperiance() {
           </h1>
         </div>
         <div>
-          {workExperiences.map((experiance) => (
+          {experiances.map((experiance) => (
             <div
               key={experiance.id}
-              className="flex flex-col md:flex-row bg-[#04335C] rounded-lg overflow-hidden gap-3 shadow-md  my-8 p-5 md:p-10"
+              className="flex flex-col md:flex-row bg-[#111827] rounded-lg overflow-hidden gap-3 shadow-md  my-8 p-5 md:p-10"
             >
-              <div className="bg-[#4169e1] p-6 md:w-1/3 text-white rounded-t-md">
+              <div className="bg-[#172A45] p-6 md:w-1/3 text-white rounded-t-md">
                 <h3 className="text-2xl font-bold mb-2">{experiance.position}</h3>
                 <p className="text-sm mb-2">{experiance.company} {" "} | {" "} {experiance.location}</p>
                 <p className="text-sm mb-4">{experiance.startDate} - {experiance.endDate}</p>

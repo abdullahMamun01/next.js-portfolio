@@ -9,13 +9,13 @@ export default function AboutSection() {
         <div className="flex flex-col lg:flex-row items-center justify-between">
           <div className="lg:w-1/2 mb-10 lg:mb-0">
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-[#4d79ff] to-[#38b6ff] rounded-3xl transform rotate-3"></div>
+              <div className="absolute inset-0 md:w-full w-3/4 mx-auto bg-gradient-to-r from-[#4d79ff] to-[#38b6ff] rounded-3xl transform rotate-3"></div>
               <Image
-              width={500}
-              height={500}
+              width={1000}
+              height={1000}
                 src="https://avatars.githubusercontent.com/u/91420483?s=400&u=3655f6c14bf582659ab648f0499379e16b279e9c&v=4" 
                 alt="Portrait of Jenna"
-                className="relative z-10 rounded-3xl w-full max-w-md mx-auto"
+                className="relative z-10 rounded-3xl w-3/5 md:w-full max-w-md mx-auto"
               />
             </div>
           </div>
@@ -52,7 +52,7 @@ export default function AboutSection() {
       <div className="absolute left-0 top-10 w-64 h-64 opacity-10">
         <div className="w-full h-full border-[32px] border-[#4d9fff] rounded-full"></div>
       </div>
-      <div className="absolute right-0 top-0 w-96 h-96 opacity-10">
+      <div className="absolute md:right-0 top-10 right-0  md:top-0 w-64 h-64 md:w-96 md:h-96 opacity-10 ">
         <div className="w-full h-full border-[48px] border-[#4d9fff] rounded-full"></div>
       </div>
     </div>

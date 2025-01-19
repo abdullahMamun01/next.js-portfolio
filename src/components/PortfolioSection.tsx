@@ -1,77 +1,134 @@
-import { allProjectFromDB } from "@/database/queries";
-import { ArrowRight, ChevronRight } from "lucide-react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+
+import { client, imageUrlFor } from "@/sanity/client";
 import Image from "next/image";
+
+import React from "react";
+
 import Link from "next/link";
-export const dynamic = 'force-dynamic';
-export const revalidate = 60;
+/* *[_type == "post"]{ _id, title } */
+type TProject = {
+  id: string; // Unique identifier, likely a MongoDB ObjectId
+  name: string; // Project title
+  description: string; // Brief description of the project
+  clientRepo: string; // URL for the client-side repository
+  serverRepo: string; // URL for the server-side repository
+  liveUrl: string; // URL for the live version of the project
+  tags: string[]; // Array of tags associated with the project
+  imageUrl: string; // URL of the project's image
+};
 export default async function PortfolioSection() {
-  const projects = await allProjectFromDB();
+  const projectQuer =
+    '*[_type == "project"]{_id, name, description, clientRepo,serverRepo, liveUrl,tags, image}';
+  const projectListFromDB = await client.fetch(projectQuer);
+
+  const projects: TProject[] = projectListFromDB.map((pj: any) => ({
+    id: pj._id,
+    name: pj.name,
+    description: pj.description,
+    clientRepo: pj.clientRepo,
+    serverRepo: pj.serverRepo,
+    liveUrl: pj.liveUrl,
+    tags: pj.tags,
+    imageUrl: imageUrlFor(pj.image).url(),
+  }));
+
+  // const query = `*[_id == $id][0]`; // Query for the document by _id
+
+  //   const item = await client.fetch(query, {id: `901c1135-9577-46e3-b9bd-d4ad38f3cc77`});
 
   return (
-    <section className="bg-[#04335C] text-white py-10 md:px-8 " id="project">
-      <div className=" mx-auto px-8  md:px-[5rem]">
-        <div className="mb-12 flex justify-between">
-          <div>
-            <h2 className="text-sm mb-2">MY WORK</h2>
-            <h1 className="text-2xl md:text-4xl font-bold mb-8">
-              RECENT PROJECT
-            </h1>
-          </div>
+    <section className="min-h-screen text-white py-20 relative">
+      <div className="max-w-6xl mx-auto px-4">
+        <h2 className="text-3xl text-center md:text-start  md:text-5xl font-bold mb-16">Things I have Worked on</h2>
 
-          <Link
-            href="/projects"
-            className="text-white hover:text-blue-400 flex items-center"
-          >
-            View All Posts
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Link>
-        </div>
-      </div>
-      <div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-8 md:px-20 ">
-          {projects.slice(0, 6).map((project, index) => (
-            <div
-              key={index}
-              className="bg-[#07223A] text-white rounded-lg overflow-hidden"
-            >
-              <Link href={`/projects/${project._id.toString()}`}>
-                <div className="relative h-48">
-                  <Image
-                    src={project.imageUrl}
-                    alt={project.title}
-                    layout="fill"
-                    objectFit="cover"
-                  />
-                </div>
-              </Link>
-              <div className="p-4">
-                <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                <p className="text-gray-300 text-sm leading-6 line-clamp-3">
-                  {project.description}
-                </p>
+        {projects?.map((pj: TProject) => (
+          <div className="relative mb-20 round px-4 md:px-0" key={pj.id}>
+            <Link href={`/projects/${pj.id}`}>
+              {/* Left side content */}
+              <div className="relative lg:flex items-center  ">
+                {/* Description box - positioned to overlap */}
+                <div className="bg-[#172A45] lg:order-2 p-8 flex-row-reverse rounded-md md:rounded-xl lg:absolute lg:left-0 lg:top-1/2 lg:w-[550px] z-10 lg:-translate-y-1/2 lg:translate-x-8">
+                  <div className=" w-full lg:w-3/3 mb-8 ">
+                    <p className="text-sm text-[#64ffda] mb-2">
+                      Featured Project
+                    </p>
+                    <h3 className="text-xl text-[#64ffda] mb-2 line-clamp-1">
+                      {pj.name}
+                    </h3>
+                  </div>
 
-                <div className="flex flex-wrap gap-1 my-4">
-                  {project?.technologies?.map((tech: string, index: number) => (
-                    <span
-                      key={index}
-                      className="px-1 py-1 bg-[#0f2744] text-blue-300 rounded-full text-sm"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-                <Link
-                  href={`/projects/${project._id.toString()}`}
-                  className="text-white hover:text-blue-400 flex items-center"
-                >
-                  <button className="mt-4 bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full flex items-center px-4">
-                    View Details <ChevronRight size={20} />
+                  <div className="w-full md:hidden mb-4">
+                      <Image
+                        src={pj.imageUrl}
+                        alt="PIAIC Web Portal Screenshot"
+                        className="object-cover w-full h-auto"
+                        width={1000}
+                        height={1000}
+                      />
+                    </div>
+                  <p className="text-gray-300 text-[1rem] mb-3 leading-relaxed line-clamp-3">
+                    {pj.description}
+                  </p>
+
+                  {/* Repository Links */}
+                  {/* <div className="flex gap-4 mb-8">
+                  <button className="text-[#64ffda] border-[#64ffda] bg-[#64ffda]/10 flex justify-center items-center px-4 rounded-md">
+                    <Link2 className="mr-2 h-4 w-4" />
+                    Live Demo
                   </button>
-                </Link>
+                  <button className="text-[#64ffda] border-[#64ffda] bg-[#64ffda]/10 flex justify-center items-center px-4 rounded-md">
+                    <GithubIcon className="mr-2 h-4 w-4" />
+                    Client Repo
+                  </button>
+                  <button className="text-[#64ffda] border-[#64ffda] bg-[#64ffda]/10 flex justify-center items-center px-4 rounded-md py-2">
+                    <GithubIcon className="mr-2 h-4 w-4" />
+                    Server Repo
+                  </button>
+                </div> */}
+
+                  {/* Technologies Grid */}
+                  <div className="grid grid-cols-3 md:grid-cols-5 gap-1 text-xs text-[#64ffda]">
+                    {pj?.tags?.map((pj: string, i: number) => (
+                      <React.Fragment key={i}>
+                        <span className="bg-[#64ffda]/10 flex justify-center items-center py-1 rounded-md">
+                          {pj}
+                        </span>
+                      </React.Fragment>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Browser Window - positioned on the right */}
+                <div className="max-sm:hidden lg:order-1 lg:ml-auto lg:w-[700px]">
+                  <div className="rounded-lg overflow-hidden shadow-2xl">
+                    <div className="bg-[#2a2f37] p-2 flex items-center gap-2">
+                      <div className="flex gap-1.5">
+                        <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                        <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                        <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                      </div>
+                      <div className="flex-1 px-3">
+                        <div className="bg-[#1a1f26] rounded text-center text-sm py-1 text-gray-400">
+                          {pj.liveUrl}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="relative aspect-[16/9] z-[-10]">
+                      <Image
+                        src={pj.imageUrl}
+                        alt="PIAIC Web Portal Screenshot"
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            </Link>
+          </div>
+        ))}
       </div>
     </section>
   );
