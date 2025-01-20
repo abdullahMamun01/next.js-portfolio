@@ -8,7 +8,7 @@ export const client = createClient({
   apiVersion: "2024-01-01",
   useCdn: false,
   token:
-    "sko8ccacWBFX4533o4E6erVuLA1pX9zqAOl0LLyGbWCrEcam5PRgDd8tQL9lGuODDiHJxWDmRvMmZSq1RYFyP9iZWWEUZnnADBdA6MGGMp71PeFaMej3tGejSwRWSnxubxWfztBxwROiu9JYJN1d2k4L98BwsIeKTqexpqrxxG2ViGMG57J5",
+      process.env.NEXT_PUBLIC_SANITY_TOKEN,
 });
 
 const builder = imageUrlBuilder(client);
